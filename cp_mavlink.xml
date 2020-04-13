@@ -1,0 +1,166 @@
+<?xml version="1.0"?>
+<mavlink>
+  <version>3</version>
+
+  <enums>
+
+    <enum name="CP_OP_ACK_TYPE">
+      <description>CoPlayer Operation ACK.</description>
+      <entry value="0" name="CP_OP_ACK_TYPE_FAIL">
+        <description>fail</description>
+      </entry>
+      <entry value="1" name="CP_OP_ACK_TYPE_SUCCESS">
+        <description>success</description>
+      </entry>
+    </enum>
+
+    <enum name="CP_INSTANCE_CMD_STAGE">
+      <description>CoPlayer Instance Operation.</description>
+      <entry value="0" name="CP_INSTANCE_CMD_STAGE_0">
+        <description>Close CoPlayer Instance.</description>
+      </entry>
+      <entry value="1" name="CP_INSTANCE_CMD_STAGE_1">
+        <description>Open CoPlayer Instance.</description>
+      </entry>
+      <entry value="2" name="CP_INSTANCE_CMD_STAGE_2">
+        <description>Query CoPlayer Instance Status.</description>
+      </entry>
+      <entry value="3" name="CP_INSTANCE_CMD_STAGE_3">
+        <description>Pair CoPlayer Instance.</description>
+      </entry>
+    </enum>
+
+    <enum name="CP_INSTANCE_OP_TYPE">
+      <description>CoPlayer Instance Operation.</description>
+      <entry value="0" name="CP_INSTANCE_OP_TYPE_CLOSE">
+        <description>Close CoPlayer Instance.</description>
+      </entry>
+      <entry value="1" name="CP_INSTANCE_OP_TYPE_OPEN">
+        <description>Open CoPlayer Instance.</description>
+      </entry>
+      <entry value="2" name="CP_INSTANCE_OP_TYPE_QUERY">
+        <description>Query CoPlayer Instance Status.</description>
+      </entry>
+    </enum>
+
+    <enum name="CP_VIDEO_OP_TYPE">
+      <description>CoPlayer Video Operation.</description>
+      <entry value="0" name="CP_VIDEO_OP_TYPE_PAUSE">
+        <description>Pause Video Instance.</description>
+      </entry>
+      <entry value="1" name="CP_VIDEO_OP_TYPE_PLAY">
+        <description>Play Video Instance.</description>
+      </entry>
+    </enum>
+
+  </enums>
+
+  <messages>
+
+    <!-- <message id="0" name="TEST_TYPES">
+      <description>Test all field types</description>
+      <field type="char" name="c">char</field>
+      <field type="char[10]" name="s">string</field>
+      <field type="uint8_t" name="u8">uint8_t</field>
+      <field type="uint16_t" name="u16">uint16_t</field>
+      <field print_format="0x%08x" type="uint32_t" name="u32">uint32_t</field>
+      <field type="uint64_t" name="u64">uint64_t</field>
+      <field type="int8_t" name="s8">int8_t</field>
+      <field type="int16_t" name="s16">int16_t</field>
+      <field type="int32_t" name="s32">int32_t</field>
+      <field type="int64_t" name="s64">int64_t</field>
+      <field type="float" name="f">float</field>
+      <field type="double" name="d">double</field>
+      <field type="uint8_t[3]" name="u8_array">uint8_t_array</field>
+      <field type="uint16_t[3]" name="u16_array">uint16_t_array</field>
+      <field type="uint32_t[3]" name="u32_array">uint32_t_array</field>
+      <field type="uint64_t[3]" name="u64_array">uint64_t_array</field>
+      <field type="int8_t[3]" name="s8_array">int8_t_array</field>
+      <field type="int16_t[3]" name="s16_array">int16_t_array</field>
+      <field type="int32_t[3]" name="s32_array">int32_t_array</field>
+      <field type="int64_t[3]" name="s64_array">int64_t_array</field>
+      <field type="float[3]" name="f_array">float_array</field>
+      <field type="double[3]" name="d_array">double_array</field>
+    </message> -->
+
+    <message id="0" name="HEARTBEAT">
+      <description>The heartbeat message shows that a system is responding.</description>
+      <field type="char[37]" name="uuid">my uuid</field>
+      <field type="char[37]" name="pass_uuid">pass uuid</field>
+      <field type="char[37]" name="to_uuid">to uuid</field>
+      <field type="char[37]" name="pair_uuid">pair uuid</field>
+      <field type="uint64_t" name="timestamp">timestamp</field>
+    </message>
+
+    <message id="1" name="CP_INSTANCE_OP">
+      <description>Instance Operation.</description>
+      <field type="char[37]" name="uuid">my uuid</field>
+      <field type="char[37]" name="pass_uuid">pass uuid</field>
+      <field type="char[37]" name="prv_uuid">previous uuid</field>
+      <field type="uint8_t" name="op" enum="CP_INSTANCE_OP_TYPE">Operation Type</field>
+      <field type="uint64_t" name="timestamp">timestamp</field>
+    </message>
+
+    <message id="2" name="CP_INSTANCE_OP_ACK">
+      <description>Instance Operation ACK.</description>
+      <field type="char[37]" name="uuid">uuid</field>
+      <field type="char[37]" name="to_uuid">to uuid</field>
+      <field type="uint8_t" name="op" enum="CP_INSTANCE_OP_TYPE">Operation Type</field>
+      <field type="uint8_t" name="ack" enum="CP_OP_ACK_TYPE">Operation ACK</field>
+      <field type="uint64_t" name="timestamp">timestamp</field>
+    </message>
+
+    <message id="3" name="CP_INSTANCE_STATUS">
+      <description>Instance Status.</description>
+      <field type="char[37]" name="uuid">uuid</field>
+      <field type="char[37]" name="to_uuid">to uuid</field>
+      <field type="char[37]" name="pair_uuid">pair uuid</field>
+      <field type="char[50]" name="pair_name">pair name</field>
+      <field type="uint64_t" name="video_duration">video duration</field>
+      <field type="uint64_t" name="video_size">video size</field>
+      <field type="uint64_t" name="video_time">video time</field>
+      <field type="uint64_t" name="timestamp">timestamp</field>
+    </message>
+
+    <message id="4" name="CP_INSTANCE_PAIR">
+      <description>Instance Pair.</description>
+      <field type="char[37]" name="uuid">my uuid</field>
+      <field type="char[37]" name="pass_uuid">pass uuid</field>
+      <field type="char[37]" name="pair_uuid">pair uuid</field>
+      <field type="char[50]" name="pair_name">pair name</field>
+      <field type="uint8_t" name="pair_stage" enum="CP_INSTANCE_CMD_STAGE">Pair Stage</field>
+      <field type="uint64_t" name="timestamp">timestamp</field>
+    </message>
+
+    <message id="5" name="CP_INSTANCE_PAIR_ACK">
+      <description>Instance Pair ACK.</description>
+      <field type="char[37]" name="uuid">uuid</field>
+      <field type="char[37]" name="to_uuid">to uuid</field>
+      <field type="uint8_t" name="pair_stage" enum="CP_INSTANCE_CMD_STAGE">Pair Stage</field>
+      <field type="uint8_t" name="ack" enum="CP_OP_ACK_TYPE">Pair ACK</field>
+      <field type="uint64_t" name="timestamp">timestamp</field>
+    </message>
+
+    <message id="6" name="CP_VIDEO_OP">
+      <description>Video Operation.</description>
+      <field type="char[37]" name="uuid">my uuid</field>
+      <field type="char[37]" name="pass_uuid">pass uuid</field>
+      <field type="uint8_t" name="op" enum="CP_VIDEO_OP_TYPE">Video Operation</field>
+      <field type="uint8_t" name="op_stage" enum="CP_INSTANCE_CMD_STAGE">Operation Stage</field>
+      <field type="uint64_t" name="video_time">video time</field>
+      <field type="uint64_t" name="timestamp">timestamp</field>
+    </message>
+
+    <message id="7" name="CP_VIDEO_OP_ACK">
+      <description>Instance Pair ACK.</description>
+      <field type="char[37]" name="uuid">uuid</field>
+      <field type="char[37]" name="to_uuid">to uuid</field>
+      <field type="uint8_t" name="op" enum="CP_VIDEO_OP_TYPE">Video Operation</field>
+      <field type="uint8_t" name="op_stage" enum="CP_INSTANCE_CMD_STAGE">Operation Stage</field>
+      <field type="uint8_t" name="ack" enum="CP_OP_ACK_TYPE">Video Operation ACK</field>
+      <field type="uint64_t" name="timestamp">timestamp</field>
+    </message>
+
+  </messages>
+
+</mavlink>
